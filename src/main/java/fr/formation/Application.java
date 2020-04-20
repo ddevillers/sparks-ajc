@@ -15,6 +15,7 @@ public class Application {
 		
 		
 		
+		System.out.println("Coralie");
 		
 		
 	System.out.println("Romain");	
@@ -25,10 +26,12 @@ public class Application {
 		
 		
 		
+
 		
 		
 		
 		
+		System.out.println("Tomu");
 		
 		
 		
@@ -38,6 +41,7 @@ public class Application {
 		
 		
 		System.out.println("Jérémy");
+		
 		
 	}
 }
