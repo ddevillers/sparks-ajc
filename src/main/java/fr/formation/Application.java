@@ -10,7 +10,7 @@ public class Application {
 		System.out.println("Del");
 		
 		
-		System.out.println("Xalbat (avec une clef Valorant (Oui bon, j'ai jamais dit que j'allais être joueur pro))");
+		System.out.println("Xalbat (avec une clef Valorant (Oui bon, j'ai jamais dit que j'allais être joueur tout court d'ailleurs))");
 		
 		
 		
@@ -42,6 +42,6 @@ public class Application {
 		
 		
 		
-		
+		System.out.println("Tu auras intérêt de nous carry quand tu auras t'as clef Jordan");
 	}
 }
