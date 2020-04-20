@@ -10,7 +10,7 @@ public class Application {
 		System.out.println("Del");
 		
 		
-		System.out.println("Xalbat (avec une clef Valorant (TU SAIS TELLEMENT PAS JOUER, AVEC TON AIM DE CHEVRE))");
+		System.out.println("Xalbat (avec une clef Valorant (Oui bon, j'ai jamais dit que j'allais être joueur pro))");
 		
 		
 		
