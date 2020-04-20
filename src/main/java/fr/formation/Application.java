@@ -2,11 +2,11 @@ package fr.formation;
 
 public class Application {
 	public static void main(String[] args) {
-		System.out.println("Hello Woor!d!");
+		System.out.println("Hello World!");
 		System.out.println("#JESUISJORDAN#DROPAKEYPLZ");
 		
 		System.out.println("Kodo");
-		
+		System.out.println("Anthony");
 		System.out.println("Del");
 		
 		
