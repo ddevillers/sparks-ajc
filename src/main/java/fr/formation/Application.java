@@ -9,12 +9,15 @@ public class Application {
 	public static void main(String[] args) 
 	{
 		System.out.println("Hello Woorld!");
-<<<<<<< Updated upstream
-		
+
 		System.out.println("Del");
-=======
+		System.out.println("Xalleboss");
 		System.out.println("Coralie");
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 >>>>>>> demo-git
+=======
+
+>>>>>>> Stashed changes
 	}
 }
