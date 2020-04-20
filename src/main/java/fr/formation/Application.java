@@ -3,7 +3,7 @@ package fr.formation;
 public class Application {
 	public static void main(String[] args) {
 		System.out.println("Hello Woor!d!");
-		System.out.println("#JESUISJORDAN");
+		System.out.println("#JESUISJORDAN#DROPAKEYPLZ");
 		
 		System.out.println("Kodo");
 		
@@ -18,7 +18,7 @@ public class Application {
 		
 
 		System.out.println("Antoine");
-		
+		System.out.println("Olivier");
 		
 	System.out.println("Romain");	
 		
