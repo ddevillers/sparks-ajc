@@ -5,5 +5,6 @@ public class Application {
 		System.out.println("Hello Woor!d!");
 		System.out.println("Adrien, pas lui, l'autre");
 		System.out.println("Jérémy");
+		System.out.println("Julien : What a bordel");
 	}
 }
