@@ -3,7 +3,7 @@ package fr.formation;
 public class Application {
 	public static void main(String[] args) {
 		System.out.println("Hello Woor!d!");
-		System.out.println("â�¤");
+		System.out.println("❤");
 		
 		
 		System.out.println("Del");
@@ -15,6 +15,7 @@ public class Application {
 		
 		
 		
+		System.out.println("Coralie");
 		
 		
 		
@@ -38,12 +39,11 @@ public class Application {
 		
 		
 		
+		System.out.println("Jérémy");
 		
-		System.out.println("tomu");
-		
-		
-		System.out.println("JÃ©rÃ©my");
-
-		
+		System.out.println("Adrien, pas lui, l'autre");
+		System.out.println("Jérémy");
+		System.out.println("Hello World!");
+		System.out.println("Coralie");
 	}
 }
