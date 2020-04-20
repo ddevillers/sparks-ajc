@@ -9,7 +9,7 @@ public class Application {
 		System.out.println("Del");
 		
 		
-		System.out.println("Xalbat (avec une clef Valorant)");
+		System.out.println("Xalbat (avec une clef Valorant (TU SAIS TELLEMENT PAS JOUER, AVEC TON AIM DE CHEVRE))");
 		
 		
 		
@@ -42,6 +42,5 @@ public class Application {
 		
 		
 		
-	Jordan	
 	}
 }
