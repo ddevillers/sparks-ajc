@@ -6,6 +6,7 @@ public class Application {
 		System.out.println("❤");
 		
 		
+		System.out.println("Del");
 		
 		
 		
@@ -36,8 +37,7 @@ public class Application {
 		
 		
 		
-		
-		
+		System.out.println("Jérémy");
 		
 	}
 }
