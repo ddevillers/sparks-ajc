@@ -3,24 +3,24 @@ package fr.formation;
 public class Application {
 	public static void main(String[] args) {
 		System.out.println("Hello Woor!d!");
-		System.out.println("❤");
+		
 		
 		
 		System.out.println("Del");
 		
 		
 		
-		System.out.println("Xalleboss");
 		
 		
 		
 		
-		System.out.println("Coralie");
+		
+
+		
 		
 		
 	System.out.println("Romain");	
 		
-		System.out.println("Antoine");
 		
 		
 		
@@ -31,7 +31,6 @@ public class Application {
 		
 		
 		
-		System.out.println("Tomu");
 		
 		
 		
@@ -40,7 +39,8 @@ public class Application {
 		
 		
 		
-		System.out.println("Jérémy");
+		
+		
 		
 		
 	}
