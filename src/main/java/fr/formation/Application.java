@@ -4,7 +4,7 @@ public class Application {
 	public static void main(String[] args) {
 		System.out.println("Hello Woor!d!");
 		
-		
+		System.out.println("Kodo");
 		
 		System.out.println("Del");
 		
@@ -16,7 +16,7 @@ public class Application {
 		
 		
 
-		
+		System.out.println("Antoine");
 		
 		
 	System.out.println("Romain");	
