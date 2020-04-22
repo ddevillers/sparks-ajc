@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-@DiscriminatorValue("medecin")
+@DiscriminatorValue("Medecin")
 public class Medecin extends Compte {
 	@Column(name = "salle", nullable = false)
 	private int salle;
