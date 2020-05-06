@@ -1,0 +1,40 @@
+<html th:replace="~{ layout.html :: layout('Liste des patients', ~{ ::body }) }">
+
+<body>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Sécurité sociale</th>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<th></th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="p : ${ patients }"
+				th:if="${ p.prenom != 'Jordan' }">
+				<td>[[ ${ p.secu } ]]</td>
+				<td>[[ ${ p.nom } ]]</td>
+				<td>[[ ${ p.prenom } ]]</td>
+				<td>
+					<a class="btn btn-primary" th:href="@{ patient/{secu}(secu=${ p.secu }) }">Editer</a>
+					<a class="btn btn-danger" th:href="@{ patient/{secu}/supprimer(secu=${ p.secu }) }">Supprimer</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<form method="POST" action="patient">
+		<input type="text" name="secu" placeholder="Secu" />
+		<input type="text" name="nom" placeholder="Nom" />
+		<input type="text" name="prenom" placeholder="Prenom" />
+		
+		<input type="text" name="adresse.numero" placeholder="Numéro adresse" />
+		
+		<input type="submit" class="btn btn-success" value="Valider" />
+	</form>
+</body>
+
+</html>

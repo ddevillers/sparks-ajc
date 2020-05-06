@@ -1,0 +1,112 @@
+<html th:replace="~{ layout.html :: layout('Liste des visites', ~{ ::body }) }">
+
+<body>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Prix</th>
+				<th>Médecin</th>
+				<th>Patient</th>
+				<th></th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<th:block th:each="v : ${ visites }">
+				<tr th:replace="visite-part.html(v=${ v })" />
+			</th:block>
+		</tbody>
+	</table>
+
+	<form method="POST" action="visite">
+		<input type="date" name="dateVisite"
+				th:value="${ #dates.format(#dates.createNow(), 'yyyy-MM-dd') }"
+				placeholder="Date de la visite" />
+				
+		
+		<input type="number" name="prix" th:value="${ visite?.prix }" placeholder="Prix de la visite" />
+		<span id="error" th:if="${ visite != null }" th:errors="${visite.prix}"></span>
+
+		<select name="medecin.id">
+			<option th:each="m : ${ medecins }"
+					th:value="${ m.id }">[[ ${ m.login } ]]</option>
+		</select>
+		
+		
+		<select name="patient.secu">
+			<option th:each="p : ${ patients }"
+					th:value="${ p.secu }"
+					th:text="${ p.prenom + ' ' + p.nom }" />
+		</select>
+		
+		<input type="submit" class="btn btn-success" value="Valider" />
+	</form>
+
+	<button>TEST AJAX</button>
+
+	<script>
+		//envoyer une requête ajax : fetch()
+		//sélectionner des éléments html : document.querySelector()
+		
+		//Ajax -> balance une requête HTTP vers un serveur
+		//<- Ajax reçoit une réponse, et la traite éventuellement
+
+
+		//Fonction qui pourra être appelée au clique sur le bouton "ajax" et à l'envoi du formulaire
+		const sendVisite = (e) => {
+			e.preventDefault();
+
+			// let formData = new FormData(document.querySelector('form'));
+			
+			let laVisiteDuForm = {
+				dateVisite: document.querySelector('[name="dateVisite"]').value,
+				prix: document.querySelector('[name="prix"]').value,
+				
+				medecin: {
+					id: document.querySelector('[name="medecin.id"]').value
+				},
+
+				patient: {
+					secu :document.querySelector('[name="patient.secu"]').value
+				}
+			};
+
+
+			// fetch('visite-ajax') //GET PAR DEFAUT
+			
+			// fetch('visite-ajax.html', {
+			fetch('visite-ajax.json', {
+				method: 'POST',
+				body: JSON.stringify(laVisiteDuForm),
+				headers: {
+					'Content-Type': 'application/json' //On précise qu'on communique en JSON
+				}
+			})
+
+			// .then(function(resp) {
+			// 	return resp.text();
+			// })
+
+			// .then(resp => resp.text()) //Conversion du flux HTML en Texte
+			// .then(visiteHtml => {
+			// 	console.log("réception ...");
+			// 	document.querySelector('tbody').innerHTML += visiteHtml;
+			// });
+			
+			.then(resp => resp.json()) //Conversion du flux JSON en Object JS
+			.then(visite => {
+				console.log("réception ...");
+				document.querySelector('button').innerHTML = visite.prix;
+			});
+
+			console.log("exemple");
+		};
+		
+
+		document.querySelector('button').addEventListener('click', sendVisite);
+		document.querySelector('form').addEventListener('submit', sendVisite);
+	</script>
+</body>
+
+</html>
