@@ -12,6 +12,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import projection.Views;
+
 @Entity
 @Table(name = "patient")
 public class Patient implements Serializable {
@@ -19,15 +23,19 @@ public class Patient implements Serializable {
 
 	@Id
 	@Column(name = "secu")
+	@JsonView(Views.Common.class)
 	private int secu;
 
 	@Column(name = "nom", length = 50, nullable = false)
+	@JsonView({ Views.Patient.class, Views.Visite.class })
 	private String nom;
 
 	@Column(name = "prenom", length = 50, nullable = false)
+	@JsonView(Views.Patient.class)
 	private String prenom;
 
 	@Column(name = "tel", length = 20)
+	@JsonView(Views.Patient.class)
 	private String tel;
 
 	@Embedded
@@ -35,6 +43,7 @@ public class Patient implements Serializable {
 
 	// RELATION INVERSE PAS OBLIGATOIRE SI ON DECIDE QU'ON EN A PAS BESOIN
 	@OneToOne(mappedBy = "lastPatient")
+	@JsonView(Views.Patient.class)
 	private Medecin medecin;
 
 	// RELATION INVERSE PAS OBLIGATOIRE SI ON DECIDE QU'ON EN A PAS BESOIN

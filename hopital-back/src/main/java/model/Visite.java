@@ -14,10 +14,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import projection.Views;
 
 @Entity
 @Table(name = "visite")
@@ -25,10 +29,12 @@ public class Visite {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
+	@JsonView(Views.Common.class)
 	private int id;
 
 	@Column(name = "prix", nullable = false)
 	@Min(value = 1, message = "DOIT ETRE SUP A 1 !!!")
+	@JsonView(Views.Visite.class)
 	private double prix = 20;
 
 	@Column(name = "date_visite", nullable = false)
@@ -36,14 +42,18 @@ public class Visite {
 //	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonView(Views.Visite.class)
 	private LocalDate dateVisite;
 
 	@ManyToOne//(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_medecin")
+	@NotNull
 	private Medecin medecin;
 
 	@ManyToOne
 	@JoinColumn(name = "id_patient")
+	@NotNull
+	@JsonView(Views.Visite.class)
 	private Patient patient;
 
 	@ManyToMany(mappedBy = "visites")
