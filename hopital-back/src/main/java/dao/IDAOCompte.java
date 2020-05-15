@@ -9,6 +9,8 @@ import model.Compte;
 import model.Medecin;
 
 public interface IDAOCompte extends JpaRepository<Compte, Integer> {
+	public Compte findByLogin(String login);
+	
 	@Query("select c from Compte c where c.login = ?1 and c.password = ?2")
 	public Compte checkConnect(String login, String password);
 	

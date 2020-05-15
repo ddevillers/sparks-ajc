@@ -1,4 +1,5 @@
-<html th:replace="~{ layout.html :: layout('Liste des visites', ~{ ::body }) }">
+<html th:replace="~{ layout.html :: layout('Liste des visites', ~{ ::body }) }"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <body>
 	<table class="table table-striped">
@@ -8,7 +9,7 @@
 				<th>Prix</th>
 				<th>Médecin</th>
 				<th>Patient</th>
-				<th></th>
+				<th sec:authorize="hasRole('ADMIN')"></th>
 			</tr>
 		</thead>
 		
@@ -19,7 +20,9 @@
 		</tbody>
 	</table>
 
-	<form method="POST" action="visite">
+	<form method="POST" action="visite" sec:authorize="hasRole('ADMIN')">
+		<input type="hidden" th:name="${ _csrf.parameterName }" th:value="${ _csrf.token }" />
+
 		<input type="date" name="dateVisite"
 				th:value="${ #dates.format(#dates.createNow(), 'yyyy-MM-dd') }"
 				placeholder="Date de la visite" />
@@ -55,7 +58,7 @@
 
 		//Fonction qui pourra être appelée au clique sur le bouton "ajax" et à l'envoi du formulaire
 		const sendVisite = (e) => {
-			e.preventDefault();
+			e.preventDefault(); //Permet d'annuler le comportement par défaut du navigateur
 
 			// let formData = new FormData(document.querySelector('form'));
 			
@@ -68,15 +71,15 @@
 				},
 
 				patient: {
-					secu :document.querySelector('[name="patient.secu"]').value
+					secu: document.querySelector('[name="patient.secu"]').value
 				}
 			};
 
 
 			// fetch('visite-ajax') //GET PAR DEFAUT
 			
-			// fetch('visite-ajax.html', {
-			fetch('visite-ajax.json', {
+			// fetch('visite-ajax.json', {
+			fetch('visite-ajax.html', {
 				method: 'POST',
 				body: JSON.stringify(laVisiteDuForm),
 				headers: {
@@ -88,22 +91,21 @@
 			// 	return resp.text();
 			// })
 
-			// .then(resp => resp.text()) //Conversion du flux HTML en Texte
-			// .then(visiteHtml => {
-			// 	console.log("réception ...");
-			// 	document.querySelector('tbody').innerHTML += visiteHtml;
-			// });
-			
-			.then(resp => resp.json()) //Conversion du flux JSON en Object JS
-			.then(visite => {
+			.then(resp => resp.text()) //Conversion du flux HTML en Texte
+			.then(visiteHtml => {
 				console.log("réception ...");
-				document.querySelector('button').innerHTML = visite.prix;
+				document.querySelector('tbody').innerHTML += visiteHtml;
 			});
+			
+			// .then(resp => resp.json()) //Conversion du flux JSON en Object JS
+			// .then(visite => {
+			// 	console.log("réception ...");
+			// 	document.querySelector('button').innerHTML = visite.prix;
+			// });
 
 			console.log("exemple");
 		};
 		
-
 		document.querySelector('button').addEventListener('click', sendVisite);
 		document.querySelector('form').addEventListener('submit', sendVisite);
 	</script>

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +21,7 @@ import dao.IDAOVisite;
 import model.Compte;
 import model.Patient;
 import model.Visite;
+import security.UserPrincipal;
 
 @Controller
 public class VisiteController {
@@ -31,13 +34,20 @@ public class VisiteController {
 	@Autowired
 	private IDAOPatient daoPatient;
 	
-	@GetMapping("/visite")
-	public String findAll(Model model) {
+	@GetMapping({ "/", "/visite" })
+	public String findAll(Model model, Authentication auth) {
+		System.out.println(auth.getCredentials());
+		System.out.println(auth.getDetails());
+		System.out.println(
+			((UserPrincipal)auth.getPrincipal()).spec()
+		);
+		
 		return "visites";
 	}
 	
 	
 	@PostMapping("/visite")
+	@PreAuthorize("hasRole('ADMIN')")
 	public String add(@Valid @ModelAttribute Visite visite, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "visites";
@@ -49,6 +59,7 @@ public class VisiteController {
 	}
 	
 	@GetMapping("/visite/{id}/supprimer")
+	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteById(@PathVariable int id) {
 		try {
 			this.daoVisite.deleteById(id);

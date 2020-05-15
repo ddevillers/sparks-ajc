@@ -15,7 +15,7 @@ import model.Visite;
 public class VisiteAjaxController {
 	@Autowired
 	private IDAOVisite daoVisite;
-	
+
 	@GetMapping("/visite-ajax")
 	@ResponseBody
 	public String testAjax() {
@@ -26,17 +26,17 @@ public class VisiteAjaxController {
 	@ResponseBody
 	public Visite testAjaxJson(@RequestBody Visite visite) {
 		this.daoVisite.save(visite);
-		
+
 		return visite;
 	}
 
 	@PostMapping("/visite-ajax.html")
 	public String testAjaxHtml(@RequestBody Visite visite, Model model) {
 		this.daoVisite.save(visite);
-		
+
 		visite = this.daoVisite.findById(visite.getId()).orElse(visite);
 		model.addAttribute("v", visite);
-		
+
 		return "visite-part";
 	}
 }
