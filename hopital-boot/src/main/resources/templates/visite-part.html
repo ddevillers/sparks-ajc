@@ -1,0 +1,10 @@
+<tr>
+	<td>[[ ${ v.dateVisite } ]]</td>
+	<td th:text="${ v.prix + ' €' }" />
+	<td>[[ ${ v.medecin.login } ]]</td>
+	<td>[[ ${ v.patient.prenom } ]] [[ ${ v.patient.nom } ]]</td>
+	<td sec:authorize="hasRole('ADMIN')">
+		<a class="btn btn-primary" th:href="${ 'visite/' + v.id }">Editer</a>
+		<a class="btn btn-danger" th:href="@{ visite/{id}/supprimer(id=${ v.id }) }">Supprimer</a>
+	</td>
+</tr>
