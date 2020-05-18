@@ -1,0 +1,46 @@
+<!-- Nouvelle visite -->
+<td class="new" colspan="3" *ngIf="isNew && !isEditing">Double-cliquez ici pour ajouter une nouvelle visite</td>
+
+<td *ngIf="isNew && isEditing">
+    <input type="text" [(ngModel)]="visite.id" />
+</td>
+
+<td *ngIf="isNew && isEditing">
+    <input type="text" [(ngModel)]="visite.prix" />
+</td>
+
+<td *ngIf="isNew && isEditing">
+    <button *ngIf="isEditing" (click)="edit()" class="btn btn-success m-1">Ajouter</button>
+    <button *ngIf="isEditing" (click)="cancel()" class="btn btn-danger m-1">Annuler</button>
+</td>
+
+
+
+<!-- Visite existante -->
+<td *ngIf="!isNew && !isDeleting" [class.edit]="isEditing">
+    <span *ngIf="!isEditing"><a [routerLink]="['/visite', visite.id]">{{ visite.id }}</a></span>
+    <input *ngIf="isEditing" type="number" [(ngModel)]="visite.id" />
+</td>
+
+<td *ngIf="!isNew && !isDeleting">
+    <span *ngIf="!isEditing">{{ visite.prix }}</span>
+    <input *ngIf="isEditing" type="number" [(ngModel)]="visite.prix" />
+</td>
+
+<td *ngIf="!isNew && !isDeleting">
+    <button *ngIf="!isEditing" (click)="onDblClick()" class="btn btn-warning m-1">Editer</button>
+    <button *ngIf="!isEditing" (click)="askDelete()" class="btn btn-danger m-1">Supprimer</button>
+
+    <button *ngIf="isEditing" (click)="edit()" class="btn btn-success m-1">Appliquer</button>
+    <button *ngIf="isEditing" (click)="cancel()" class="btn btn-danger m-1">Annuler</button>
+</td>
+
+
+<td colspan="2" *ngIf="isDeleting" [class.delete]="isDeleting">
+    Êtes-vous sûr de vouloir supprimer la visite <b>{{ visite.id }}</b> ?
+</td>
+
+<td *ngIf="isDeleting">
+    <button (click)="delete()" class="btn btn-danger m-1">OUI</button>
+    <button (click)="cancel()" class="btn btn-success m-1">NON</button>
+</td>

@@ -2,50 +2,76 @@
 <h2>Formulaire d'ajout de visite</h2>
 
 <div class="form-group row">
-<label for="id" class="col-sm-2 col-form-label">ID : </label>
-<div class="col-sm-10">
-	<input type="number" class="form-control" id="id" [(ngModel)]="visite.id" />
-</div>
-</div>
-
-<div class="form-group row">
-<label for="prix" class="col-sm-2 col-form-label">Prix : </label>
-<div class="col-sm-10">
-	<input type="number" class="form-control" id="prix" [(ngModel)]="visite.prix" />
-</div>
+	<label for="id" class="col-sm-2 col-form-label">ID : </label>
+	<div class="col-sm-10">
+		<input type="number" class="form-control" id="id" [(ngModel)]="visite.id" />
+	</div>
 </div>
 
 <div class="form-group row">
-<button (click)="ajouterVisite()" class="btn btn-success btn-block">Ajouter</button>
+	<label for="prix" class="col-sm-2 col-form-label">Prix : </label>
+	<div class="col-sm-10">
+		<input type="number" class="form-control" id="prix" [(ngModel)]="visite.prix" />
+	</div>
+</div>
+
+<div class="form-group row">
+	<button *ngIf="!isEditing" (click)="ajouterVisite()" class="btn btn-success btn-block">Ajouter</button>
+	<button *ngIf="isEditing" (click)="modifierVisite()" class="btn btn-warning btn-block">Modifier</button>
+	<button *ngIf="isEditing" (click)="annulerVisite()" class="btn btn-danger btn-block">Annuler</button>
 </div>
 
 
 
 <h2>Liste des visites</h2>
 <div class="alert alert-success">
-La directive <code>*ngFor</code> boucle sur la liste des visites définies dans app.component.ts.
+	La directive <code>*ngFor</code> boucle sur la liste des visites définies dans app.component.ts.
 </div>
 
 
 <input type="number" [(ngModel)]="filterPrix" />
 <table class="table table-striped">
-<thead>
-	<tr>
-	<th>ID</th>
-	<th>Prix</th>
-	<th>Infos</th>
-	</tr>
-</thead>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Prix</th>
+			<th>Infos</th>
+			<th></th>
+		</tr>
+	</thead>
 
-<tbody>
-	<tr *ngFor="let visite of visitesFiltered()">
-	<td>{{ visite.id }}</td>
-	<td>{{ visite.prix }}</td>
-	<td>
-		<span *ngIf="visite.prix > 0">Positif</span>
-		<span *ngIf="visite.prix < 0">Négatif</span>
-		<span *ngIf="visite.prix == 0">Neutre</span>
-	</td>
-	</tr>
-</tbody>
+	<tbody>
+		<tr *ngFor="let visite of visitesFiltered()">
+			<td>{{ visite.id }}</td>
+			<td>{{ visite.prix }}</td>
+			<td>
+				<span *ngIf="visite.prix > 0">Positif</span>
+				<span *ngIf="visite.prix < 0">Négatif</span>
+				<span *ngIf="visite.prix == 0">Neutre</span>
+			</td>
+
+			<td>
+				<button (click)="editerVisite(visite)" class="btn btn-warning m-1">Editer</button>
+				<button (click)="supprimerVisite(visite)" class="btn btn-danger m-1">Supprimer</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<hr />
+<h2>Liste des visites modiable en ligne</h2>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Prix</th>
+			<th>Infos</th>
+			<th></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr visite-crud-row></tr>
+		<tr *ngFor="let visite of visites" [visite-crud-row]="visite"></tr>
+	</tbody>
 </table>

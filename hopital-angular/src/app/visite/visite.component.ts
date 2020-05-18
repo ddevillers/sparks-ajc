@@ -7,10 +7,12 @@ import { Visite } from '../visite';
   styleUrls: ['./visite.component.css']
 })
 export class VisiteComponent implements OnInit {
+  isEditing = false;
+  oldVisite = null;
   visite = new Visite();
   filterPrix: number;
   
-  visites: Array<Visite> = [
+  public visites: Array<Visite> = [
     new Visite(1, 50),
     new Visite(2, 42),
     new Visite(3, 400),
@@ -20,13 +22,35 @@ export class VisiteComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 
   public ajouterVisite() {
     this.visites.push(this.visite);
     this.visite = new Visite();
+  }
+
+  public editerVisite(visite) {
+    this.isEditing = true;
+    this.visite = visite;
+    // this.oldVisite = JSON.parse(JSON.stringify(visite));
+    this.oldVisite = new Visite(visite.id, visite.prix);
+  }
+
+  public modifierVisite() {
+    this.isEditing = false;
+    this.visite = new Visite();
+  }
+
+  public annulerVisite() {
+    let index = this.visites.indexOf(this.visite);
+    this.visites.splice(index, 1, this.oldVisite);
+    this.modifierVisite();
+  }
+
+  public supprimerVisite(visite) {
+    let index = this.visites.indexOf(visite);
+    this.visites.splice(index, 1);
   }
 
   public visitesFiltered() {

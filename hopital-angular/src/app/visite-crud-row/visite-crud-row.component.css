@@ -1,0 +1,12 @@
+.new {
+    border-left: 3px solid #007bff !important;
+}
+
+.edit {
+    border-left: 3px solid #ffc107 !important;
+}
+
+
+.delete {
+    border-left: 3px solid #dc3545 !important;
+}

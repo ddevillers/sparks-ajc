@@ -8,6 +8,7 @@ import { SopraBoldElementComponent } from './sopra-bold-element/sopra-bold-eleme
 import { SopraBoldComponent } from './sopra-bold/sopra-bold.component';
 import { HomeComponent } from './home/home.component';
 import { VisiteComponent } from './visite/visite.component';
+import { VisiteCrudRowComponent } from './visite-crud-row/visite-crud-row.component';
 
 
 
@@ -25,7 +26,8 @@ const routes: Routes = [
     SopraBoldComponent,
     SopraBoldElementComponent,
     HomeComponent,
-    VisiteComponent
+    VisiteComponent,
+    VisiteCrudRowComponent
   ],
   imports: [
     BrowserModule, FormsModule,
