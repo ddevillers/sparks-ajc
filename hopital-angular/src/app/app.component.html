@@ -1,118 +1,18 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand">Hopital</a>
+ 
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/home">Accueil</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/visite">Liste des visites</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 <div class="container">
-  <div class="alert alert-warning">
-    Tous les codes Angular de notre application se trouvent dans le répertoire src/app.
-    <br />
-    Tous les composants créés se trouvent dans src/app/nom-composant.
-    <br />
-    La classe Visite se trouve dans src/app/visite.ts.
-    <br />
-    Tous les noms de fichiers sont en <b>kebab-case</b>, alors que le nom des classes sont en <b>CamelCase</b>.
-  </div>
-  
-  <h1>Partie 1 : DataBinding (MVVM)</h1>
-  <small>Les attributs sont dans app.component.ts</small>
-  <h2>Texte "title"</h2>
-  <p>
-    Bonjour, {{ title }} (one-way)
-  </p>
-  <label>Saisie (two-ways) :</label>
-  <input [(ngModel)]="title" />
-  <hr />
-
-  <p>(one-way) Action (évènement clique)</p>
-  <button (click)="changeTitle()">Changer le titre</button>
-  <hr />
-
-  <h2>Couleur</h2>
-  <p [style.color]="couleur">Un texte haut en couleurs, (one-way)</p>
-  <div>
-    <label>Avec une liste déroulante (two-ways) :</label>
-    <select [(ngModel)]="couleur">
-      <option value="black">Noir</option>
-      <option value="#ff0000">Hexa rouge</option>
-      <option value="pink">Rose</option>
-    </select>
-  </div>
-
-  <div>
-    <label>Ou bien avec un colorpicker HTML5 (two-ways)  :</label>
-    <input type="color" [(ngModel)]="couleur" />
-  </div>
-  <hr />
-
-  <h2>Objet complexe (Visite)</h2>
-  <div>
-    <label>Identifiant (two-ways) :</label>
-    <input type="number" [(ngModel)]="visite.id" />
-  </div>
-  
-  <div>
-    <label>Prix (two-ways) :</label>
-    <input type="number" [(ngModel)]="visite.prix" />
-  </div>
-
-  <div class="alert alert-danger">
-    (one-way) Le paragraphe qui contient les infos de la visite ne s'affiche que si prix != 0 et non vide
-  </div>
-
-  <p *ngIf="visite.prix" [class.negatif]="visite.prix < 0">
-    {{ visite.id }}, au prix de {{ visite.prix }} euros.
-  </p>
-  <hr />
-
-
-
-  <h1>Intégration de composants développés par nos soins</h1>
-  <small>
-    Les composants doivent être intégrés au module principal (AppModule), dans la liste des directives.
-  </small>
-
-  <div class="alert alert-success">
-    Avec Angular CLI, possible de générer un composant :
-    <code>ng generate component NomComposant</code>, il fait les déclarations automatiquement.
-  </div>
-  
-  <h2>Composant SopraBold</h2>
-  <small>
-    Ce composant utilise un @HostListener() pour écouter l'évènement "click".
-  </small>
-  <br />
-  <sopra-bold untexte="une texte">Composant utilisation Element HTML</sopra-bold>
-  <p sopra-bold>Composant utilisation attribut HTML</p>
-  <hr />
-  
-  <h2>Composant SopraBoldElement</h2>
-  <small>
-    Ce composant utilise la visite ci-dessus
-    <br />
-    Ce composant utilise des @Input() pour récupérer des informations : un préfixe et la visite.
-  </small>
-  <div class="alert alert-danger" *ngIf="!visite.prix">
-    Saisir un prix dans la zone de saisie plus haut sur la page.
-  </div>
-  <br />
-  <sopra-bold-element prefix="Voici voilà le prix" [visite]="visite"></sopra-bold-element>
-  <hr />
-  
-  <h1>Directive ngFor : lister des éléments</h1>
-  <h2>Liste des visites</h2>
-  <div class="alert alert-success">
-    La directive <code>*ngFor</code> boucle sur la liste des visites définies dans app.component.ts.
-  </div>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Prix</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let visite of visites">
-        <td>{{ visite.id }}</td>
-        <td>{{ visite.prix }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <router-outlet></router-outlet>
 </div>
