@@ -16,7 +16,6 @@ public class Medecin extends Compte {
 	@Column(name = "salle", nullable = false)
 	private int salle;
 	
-//	@Transient
 	@OneToOne
 	@JoinColumn(name = "id_patient")
 	private Patient lastPatient;

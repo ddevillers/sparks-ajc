@@ -28,6 +28,7 @@ public class Compte {
 	protected int id;
 
 	@Column(name = "login", length = 25, nullable = false)
+	@JsonView({ Views.Compte.class, Views.Visite.class })
 	protected String login;
 
 	@Column(name = "password", length = 50, nullable = false)

@@ -33,7 +33,7 @@ public class VisiteApiController {
 	
 	//LISTE DES VISITES : @Get || http://localhost.../projet/api/visite
 	@GetMapping
-	@JsonView(Views.Common.class)
+	@JsonView(Views.Visite.class)
 	public List<Visite> findAll() {
 		return this.daoVisite.findAll();
 	}

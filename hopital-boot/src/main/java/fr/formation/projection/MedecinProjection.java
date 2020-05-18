@@ -1,6 +1,13 @@
 package fr.formation.projection;
 
-public class MedecinProjection {
-	private int id;
-	private String nom;
+import org.springframework.data.rest.core.config.Projection;
+
+import fr.formation.model.Medecin;
+
+@Projection(
+	name = "medecinProjection",
+	types = { Medecin.class }
+)
+public interface MedecinProjection extends CompteProjection {
+
 }

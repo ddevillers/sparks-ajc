@@ -31,7 +31,7 @@ public class Patient implements Serializable {
 	private String nom;
 
 	@Column(name = "prenom", length = 50, nullable = false)
-	@JsonView(Views.Patient.class)
+	@JsonView({ Views.Patient.class, Views.Visite.class })
 	private String prenom;
 
 	@Column(name = "tel", length = 20)

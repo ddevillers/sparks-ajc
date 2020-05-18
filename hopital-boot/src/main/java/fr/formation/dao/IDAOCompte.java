@@ -4,10 +4,15 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import fr.formation.model.Compte;
 import fr.formation.model.Medecin;
+import fr.formation.projection.CompteProjection;
 
+@CrossOrigin("*")
+@RepositoryRestResource(excerptProjection = CompteProjection.class)
 public interface IDAOCompte extends JpaRepository<Compte, Integer> {
 	public Compte findByLogin(String login);
 	

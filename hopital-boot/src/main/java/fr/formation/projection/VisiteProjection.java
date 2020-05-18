@@ -14,4 +14,6 @@ public interface VisiteProjection {
 	public int getId();
 	public LocalDate getDateVisite();
 	public double getPrix();
+	public MedecinProjection getMedecin();
+	public PatientProjection getPatient();
 }

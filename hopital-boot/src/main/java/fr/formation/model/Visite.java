@@ -38,16 +38,15 @@ public class Visite {
 	private double prix = 20;
 
 	@Column(name = "date_visite", nullable = false)
-//	@Temporal(TemporalType.DATE)
-//	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@JsonView(Views.Visite.class)
 	private LocalDate dateVisite;
 
-	@ManyToOne//(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "id_medecin")
 	@NotNull
+	@JsonView(Views.Visite.class)
 	private Medecin medecin;
 
 	@ManyToOne
