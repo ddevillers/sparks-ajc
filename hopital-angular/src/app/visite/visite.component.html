@@ -41,14 +41,10 @@
 	</thead>
 
 	<tbody>
-		<tr *ngFor="let visite of visitesFiltered()">
+		<tr *ngFor="let visite of visitesFiltered()" [style.color]="visite.prix | prixCategory">
 			<td>{{ visite.id }}</td>
 			<td>{{ visite.prix }}</td>
-			<td>
-				<span *ngIf="visite.prix > 0">Positif</span>
-				<span *ngIf="visite.prix < 0">Négatif</span>
-				<span *ngIf="visite.prix == 0">Neutre</span>
-			</td>
+			<td>{{ visite.prix | prixCategory:"label" }}</td>
 
 			<td>
 				<button (click)="editerVisite(visite)" class="btn btn-warning m-1">Editer</button>

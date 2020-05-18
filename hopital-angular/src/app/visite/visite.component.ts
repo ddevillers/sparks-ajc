@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Visite } from '../visite';
+import { AppConfigService } from '../app-config.service';
 
 @Component({
   selector: 'app-visite',
@@ -20,9 +21,12 @@ export class VisiteComponent implements OnInit {
     new Visite(5, 499.66)
   ];
 
-  constructor() { }
+  constructor(private appConfig: AppConfigService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.appConfig.url);
+    alert(this.appConfig.url);
+  }
 
 
   public ajouterVisite() {
