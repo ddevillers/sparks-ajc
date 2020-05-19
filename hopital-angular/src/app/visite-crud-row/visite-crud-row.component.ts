@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Visite } from '../visite';
-import { VisiteComponent } from '../visite/visite.component';
+import { VisiteService } from '../visite.service';
+import { PatientService } from '../patient.service';
 
 @Component({
   selector: '[visite-crud-row]',
@@ -15,7 +16,7 @@ export class VisiteCrudRowComponent implements OnInit {
   private isEditing: boolean = false;
   private isDeleting: boolean = false;
 
-  constructor(private visiteComponent: VisiteComponent) { }
+  constructor(private srvVisite: VisiteService, private srvPatient: PatientService) { }
 
 
   //Méthode exécutée après l'initialisation du composant
@@ -55,8 +56,12 @@ export class VisiteCrudRowComponent implements OnInit {
     this.isEditing = false;
 
     if (this.isNew) {
-      this.visiteComponent.visites.push(this.visite);
+      this.srvVisite.add(this.visite);
       this.visite = new Visite();
+    }
+
+    else {
+      this.srvVisite.update(this.visite);
     }
   }
 
@@ -67,9 +72,9 @@ export class VisiteCrudRowComponent implements OnInit {
   public cancel() {
     if (this.oldVisite) {
       //On remet les données de la visite avant les modifications
-      let index = this.visiteComponent.visites.indexOf(this.visite);
+      let index = this.srvVisite.visites.indexOf(this.visite);
       this.visite = JSON.parse(JSON.stringify(this.oldVisite));
-      this.visiteComponent.visites.splice(index, 1, this.visite);
+      this.srvVisite.visites.splice(index, 1, this.visite);
     }
 
     this.isEditing = false;
@@ -90,6 +95,6 @@ export class VisiteCrudRowComponent implements OnInit {
     * Supprimer une visite
     */
   public delete() {
-    this.visiteComponent.supprimerVisite(this.visite);
+    this.srvVisite.delete(this.visite);
   }
 }

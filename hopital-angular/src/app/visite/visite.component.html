@@ -1,24 +1,54 @@
 <h1>Directive ngFor : lister des éléments</h1>
-<h2>Formulaire d'ajout de visite</h2>
 
-<div class="form-group row">
-	<label for="id" class="col-sm-2 col-form-label">ID : </label>
-	<div class="col-sm-10">
-		<input type="number" class="form-control" id="id" [(ngModel)]="visite.id" />
+<div class="card m-3">
+	<div class="card-header">
+		<h5 class="card-title">Formulaire visite</h5>
 	</div>
-</div>
+	
+	<div class="card-body">
+		<div class="form-group row">
+			<label for="dateVisite" class="col-sm-2 col-form-label">Date de la visite : </label>
+			<div class="col-sm-10">
+				<input type="date" class="form-control" id="dateVisite" [(ngModel)]="visite.dateVisite" />
+			</div>
+		</div>
 
-<div class="form-group row">
-	<label for="prix" class="col-sm-2 col-form-label">Prix : </label>
-	<div class="col-sm-10">
-		<input type="number" class="form-control" id="prix" [(ngModel)]="visite.prix" />
+		<div class="form-group row">
+			<label for="prix" class="col-sm-2 col-form-label">Prix : </label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="prix" [(ngModel)]="visite.prix" />
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="patient" class="col-sm-2 col-form-label">Patient : </label>
+			<div class="col-sm-10">
+				<!-- <select [(ngModel)]="visite.patient.secu" class="form-control" id="patient">
+					<option
+						*ngFor="let patient of srvPatient.patients"
+						[value]="patient.secu"
+						>
+						{{ patient.prenom }} {{ patient.nom }}
+					</option>
+				</select> -->
+
+				<select [(ngModel)]="visite.patient" class="form-control" id="patient">
+					<option
+						*ngFor="let patient of srvPatient.patients"
+						[ngValue]="patient"
+						>
+						{{ patient.prenom }} {{ patient.nom }}
+					</option>
+				</select>
+			</div>
+		</div>
 	</div>
-</div>
-
-<div class="form-group row">
-	<button *ngIf="!isEditing" (click)="ajouterVisite()" class="btn btn-success btn-block">Ajouter</button>
-	<button *ngIf="isEditing" (click)="modifierVisite()" class="btn btn-warning btn-block">Modifier</button>
-	<button *ngIf="isEditing" (click)="annulerVisite()" class="btn btn-danger btn-block">Annuler</button>
+	
+	<div class="card-footer text-right">
+		<button *ngIf="!isEditing" (click)="ajouterVisite()" class="btn btn-success m-1">Ajouter</button>
+		<button *ngIf="isEditing" (click)="annulerVisite()" class="btn btn-danger m-1">Annuler</button>
+		<button *ngIf="isEditing" (click)="modifierVisite()" class="btn btn-warning m-1">Modifier</button>
+	</div>
 </div>
 
 
@@ -34,7 +64,9 @@
 	<thead>
 		<tr>
 			<th>ID</th>
+			<th>Date</th>
 			<th>Prix</th>
+			<th>Patient</th>
 			<th>Infos</th>
 			<th></th>
 		</tr>
@@ -43,7 +75,9 @@
 	<tbody>
 		<tr *ngFor="let visite of visitesFiltered()" [style.color]="visite.prix | prixCategory">
 			<td>{{ visite.id }}</td>
+			<td>{{ visite.dateVisite | date:"dd/MM/yyyy" }}</td>
 			<td>{{ visite.prix }}</td>
+			<td>{{ visite.patient.prenom }} {{ visite.patient.nom }}</td>
 			<td>{{ visite.prix | prixCategory:"label" }}</td>
 
 			<td>
@@ -60,14 +94,15 @@
 	<thead>
 		<tr>
 			<th>ID</th>
+			<th>Date</th>
 			<th>Prix</th>
-			<th>Infos</th>
+			<th>Patient</th>
 			<th></th>
 		</tr>
 	</thead>
 
 	<tbody>
 		<tr visite-crud-row></tr>
-		<tr *ngFor="let visite of visites" [visite-crud-row]="visite"></tr>
+		<tr *ngFor="let visite of srvVisite.visites" [visite-crud-row]="visite"></tr>
 	</tbody>
 </table>

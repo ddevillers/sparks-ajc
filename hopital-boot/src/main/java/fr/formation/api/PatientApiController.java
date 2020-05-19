@@ -33,7 +33,7 @@ public class PatientApiController {
 	
 	//LISTE DES PATIENTS : @Get || http://localhost.../projet/api/patient
 	@GetMapping
-	@JsonView(Views.Common.class)
+	@JsonView(Views.Patient.class)
 	public List<Patient> findAll() {
 		return this.daoPatient.findAll();
 	}

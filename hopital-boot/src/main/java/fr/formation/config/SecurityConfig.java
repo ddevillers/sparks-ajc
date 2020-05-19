@@ -24,6 +24,7 @@ public class SecurityConfig {
 
 	@Configuration
 	@Order(1)
+	@Profile("!dev")
 	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 		protected void configure(HttpSecurity http) throws Exception {
 			http.antMatcher("/api/**")
@@ -38,6 +39,7 @@ public class SecurityConfig {
 	}
 
 	@Configuration
+	@Profile("!dev")
     public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {

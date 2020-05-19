@@ -1,12 +1,23 @@
 <!-- Nouvelle visite -->
-<td class="new" colspan="3" *ngIf="isNew && !isEditing">Double-cliquez ici pour ajouter une nouvelle visite</td>
+<td class="new" colspan="5" *ngIf="isNew && !isEditing">Double-cliquez ici pour ajouter une nouvelle visite</td>
+
+<td *ngIf="isNew && isEditing"></td>
 
 <td *ngIf="isNew && isEditing">
-    <input type="text" [(ngModel)]="visite.id" />
+    <input type="date" [(ngModel)]="visite.dateVisite" />
 </td>
 
 <td *ngIf="isNew && isEditing">
     <input type="text" [(ngModel)]="visite.prix" />
+</td>
+
+<td *ngIf="isNew && isEditing">
+    <select [(ngModel)]="visite.patient.secu">
+        <option *ngFor="let patient of srvPatient.patients"
+                [value]="patient.secu">
+                {{ patient.prenom }} {{ patient.nom }}
+        </option>
+    </select>
 </td>
 
 <td *ngIf="isNew && isEditing">
@@ -19,12 +30,26 @@
 <!-- Visite existante -->
 <td *ngIf="!isNew && !isDeleting" [class.edit]="isEditing">
     <span *ngIf="!isEditing"><a [routerLink]="['/visite', visite.id]">{{ visite.id }}</a></span>
-    <input *ngIf="isEditing" type="number" [(ngModel)]="visite.id" />
+</td>
+
+<td *ngIf="!isNew && !isDeleting">
+    <span *ngIf="!isEditing">{{ visite.dateVisite | date:"dd/MM/yyyy" }}</span>
+    <input *ngIf="isEditing" type="date" [(ngModel)]="visite.dateVisite" />
 </td>
 
 <td *ngIf="!isNew && !isDeleting">
     <span *ngIf="!isEditing">{{ visite.prix }}</span>
     <input *ngIf="isEditing" type="number" [(ngModel)]="visite.prix" />
+</td>
+
+<td *ngIf="!isNew && !isDeleting">
+    <span *ngIf="!isEditing">{{ visite.patient.prenom }} {{ visite.patient.nom }}</span>
+    <select *ngIf="isEditing" [(ngModel)]="visite.patient.secu">
+        <option *ngFor="let patient of srvPatient.patients"
+                [value]="patient.secu">
+                {{ patient.prenom }} {{ patient.nom }}
+        </option>
+    </select>
 </td>
 
 <td *ngIf="!isNew && !isDeleting">
@@ -36,7 +61,7 @@
 </td>
 
 
-<td colspan="2" *ngIf="isDeleting" [class.delete]="isDeleting">
+<td colspan="3" *ngIf="isDeleting" [class.delete]="isDeleting">
     Êtes-vous sûr de vouloir supprimer la visite <b>{{ visite.id }}</b> ?
 </td>
 
