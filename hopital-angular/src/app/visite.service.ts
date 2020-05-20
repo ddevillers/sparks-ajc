@@ -15,22 +15,22 @@ export class VisiteService {
   }
 
   public reload() {
-    this.http.get<Array<Visite>>(this.apiUrl)
-        .subscribe(visites => this.visites = visites);
+    this.http.get<Array<Visite>>(this.apiUrl, this.appConfig.httpOptions)
+        .subscribe(resp => this.visites = resp['_embedded'].visites );
   }
 
   public add(visite) {
-    this.http.post<Visite>(this.apiUrl, visite)
+    this.http.post<Visite>(this.apiUrl, visite, this.appConfig.httpOptions)
         .subscribe(respVisite => this.visites.push(respVisite));
   }
 
   public update(visite) {
-    this.http.put<Visite>(`${ this.apiUrl }/${ visite.id }`, visite)
+    this.http.put<Visite>(`${ this.apiUrl }/${ visite.id }`, visite, this.appConfig.httpOptions)
         .subscribe();
   }
 
   public delete(visite) {
-    this.http.delete<Boolean>(`${ this.apiUrl }/${ visite.id }`)
+    this.http.delete<Boolean>(`${ this.apiUrl }/${ visite.id }`, this.appConfig.httpOptions)
         .subscribe(resp => {
             if (resp) {
               let index = this.visites.indexOf(visite);

@@ -15,17 +15,17 @@ export class PatientService {
   }
 
   public reload() {
-    this.http.get<Array<Patient>>(this.apiUrl)
+    this.http.get<Array<Patient>>(this.apiUrl, this.appConfig.httpOptions)
         .subscribe(patients => this.patients = patients);
   }
 
   public add(patient) {
-    this.http.post<Patient>(this.apiUrl, patient)
+    this.http.post<Patient>(this.apiUrl, patient, this.appConfig.httpOptions)
         .subscribe(respPatient => this.patients.push(respPatient));
   }
 
   public update(patient) {
-    this.http.put<Patient>(`${ this.apiUrl }/${ patient.secu }`, patient)
+    this.http.put<Patient>(`${ this.apiUrl }/${ patient.secu }`, patient, this.appConfig.httpOptions)
         .subscribe(respPatient => {
           let index = this.patients.indexOf(this.patients.find(p => p.secu == patient.secu));
           this.patients.splice(index, 1, respPatient);
@@ -33,7 +33,7 @@ export class PatientService {
   }
 
   public delete(patient) {
-    this.http.delete<Boolean>(`${ this.apiUrl }/${ patient.secu }`)
+    this.http.delete<Boolean>(`${ this.apiUrl }/${ patient.secu }`, this.appConfig.httpOptions)
         .subscribe(resp => {
           if (resp) {
             let index = this.patients.indexOf(patient);

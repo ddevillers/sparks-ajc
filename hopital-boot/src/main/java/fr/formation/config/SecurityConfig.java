@@ -30,8 +30,7 @@ public class SecurityConfig {
 			http.antMatcher("/api/**")
 				.authorizeRequests()
 				.antMatchers(HttpMethod.OPTIONS).permitAll()
-				.antMatchers("/**").permitAll()
-//				.antMatchers("/**").hasAnyRole("ADMIN", "USER")
+				.antMatchers("/**").hasRole("ADMIN")
 				.and().httpBasic()
 				.and().csrf().disable()
 				;

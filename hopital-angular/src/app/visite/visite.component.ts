@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Visite } from '../visite';
 import { VisiteService } from '../visite.service';
 import { PatientService } from '../patient.service';
+import { MedecinService } from '../medecin.service';
 
 @Component({
   selector: 'app-visite',
@@ -14,11 +15,15 @@ export class VisiteComponent implements OnInit {
   visite = new Visite();
   filterPrix: number;
 
-  constructor(private srvVisite: VisiteService, private srvPatient: PatientService) { }
+  constructor(
+    private srvVisite: VisiteService,
+    private srvPatient: PatientService,
+    private srvMedecin: MedecinService) { }
 
   ngOnInit() {
     this.srvVisite.reload();
     this.srvPatient.reload();
+    this.srvMedecin.reload();
   }
 
   public visitesFiltered() {
@@ -42,6 +47,7 @@ export class VisiteComponent implements OnInit {
     this.isEditing = true;
     this.visite = visite;
     this.visite.patient = this.srvPatient.patients.find(p => p.secu == this.visite.patient.secu);
+    this.visite.medecin = this.srvMedecin.medecins.find(m => m.id == this.visite.medecin.id);
     
     // this.oldVisite = JSON.parse(JSON.stringify(visite));
     this.oldVisite = new Visite(visite.id, visite.prix);
