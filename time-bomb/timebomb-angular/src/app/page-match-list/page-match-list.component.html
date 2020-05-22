@@ -1,0 +1,41 @@
+<h1>Liste des parties</h1>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Taille</th>
+			<th>Etat</th>
+			<th></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr>
+			<td>
+				<input [(ngModel)]="formMatch.name" />
+			</td>
+
+			<td>
+				<input type="number" min="4" max="8" [(ngModel)]="formMatch.size" />
+			</td>
+
+			<td></td>
+
+			<td>
+				<button (click)="createMatch()" class="btn btn-primary">Créer</button>
+			</td>
+		</tr>
+
+		<tr *ngFor="let match of srvMatch.matches" [class.mine]="isMine(match)">
+			<td>{{ match.name }}</td>
+			<td>{{ match.players.length }} / {{ match.size }}</td>
+			<td>{{ match.state | matchState }}</td>
+			<td>
+				<button *ngIf="match.state == 'WAITING' || isMine(match)" (click)="joinMatch(match)" class="btn btn-success ml-2">Rejoindre</button>
+				<a *ngIf="!isMine(match)" class="btn btn-info ml-2" [routerLink]="[ '/matches', match.id ]">Regarder</a>
+				<button *ngIf="match.owner.id == srvUser.current.id" (click)="deleteMatch(match)" class="btn btn-danger ml-2">Supprimer</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

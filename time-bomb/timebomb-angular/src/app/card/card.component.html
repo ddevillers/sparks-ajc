@@ -1,0 +1,4 @@
+<img	(click)="play(card)"
+		[src]="getCardImage(card)"
+		class="card"
+		[class.active]="match.state == 'PLAYING' && !card.revealed && match.current.id == srvUser.current.id && card.ownerId != srvUser.current.id" />

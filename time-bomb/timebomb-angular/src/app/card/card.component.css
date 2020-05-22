@@ -1,0 +1,18 @@
+img.card {
+	display: inline-block;
+	max-width: calc(20% - 4px);
+	max-height: 100px;
+	margin: 2px;
+	pointer-events: none;
+}
+
+img.card.active {
+	pointer-events: all;
+	cursor: pointer;
+	transition: all 0.25s ease-in-out;
+}
+
+img.card.active:hover {
+	transform: translateY(-10px);
+	opacity: 0.6;
+}

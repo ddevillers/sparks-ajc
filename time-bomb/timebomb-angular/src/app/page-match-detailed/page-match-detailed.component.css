@@ -1,0 +1,20 @@
+.card .role {
+	display: none;
+	position: absolute;
+	top: 15px;
+	right: 5px;
+	width: 20px;
+	height: 20px;
+	border: solid 1px #eee;
+	border-radius: 50%;
+}
+
+.card .role.SHERLOCK {
+	display: block;
+	background: #17a2b8;
+}
+
+.card .role.MORIARTY {
+	display: block;
+	background: #dc3545;
+}

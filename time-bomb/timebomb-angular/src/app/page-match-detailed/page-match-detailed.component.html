@@ -1,0 +1,64 @@
+<h1>{{ match.name }}</h1>
+[<a routerLink="/matches">Revenir à la liste</a>]
+
+<div class="alert alert-info">
+	{{ match.owner.name }} est le créateur de cette partie à <b>{{ match.size }}</b> joueurs.
+</div>
+
+<div *ngIf="match.state == 'WAITING'" class="alert alert-danger">
+	Partie en attente des autres joueurs... Il manque {{ match.size - match.players.length }} joueur(s).
+</div>
+
+<button *ngIf="match.state == 'READY' && match.owner.id ==  srvUser.current.id"
+		(click)="startMatch()"
+		class="btn btn-success btn-block mb-2">
+	Démarrer la partie !
+</button>
+
+<div *ngIf="match.state == 'READY' && match.owner.id !=  srvUser.current.id" class="alert alert-warning">
+	Partie prête ! En attente du créateur pour démarrer la partie ...
+</div>
+
+<div *ngIf="match.state == 'TERMINATED'" class="alert alert-danger">
+	Partie terminée !<br />
+	L'équipe <b>{{ match.winner }}</b> gagne.
+</div>
+
+<div *ngIf="match.state == 'PLAYING' && diffusers > 0" class="alert alert-success">
+	Vous avez {{ diffusers }} diffuseur(s).
+</div>
+
+<div *ngIf="match.state == 'PLAYING' && bomb" class="alert alert-danger">
+	Vous avez la bombe !
+</div>
+
+
+
+<div class="row">
+	<div *ngFor="let player of match.players" class="col-sm-12 col-md-6 col-lg-3 mb-1">
+		<div class="card" [ngClass]="{ 'text-white bg-info': match.current.id == player.id }">
+			<div class="card-header">
+				<h5 class="card-title">{{ player.name }}</h5>
+				<div class="role" [ngClass]="player.role">&nbsp;</div>
+			</div>
+
+			<div class="card-body text-center">
+				<card	*ngFor="let card of getCardsForPlayer(player)"
+						[match]="match"
+						[card]="card"></card>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="match.state == 'PLAYING' || match.state == 'TERMINATED'" class="card mt-2">
+	<div class="card-header">
+		<h5 class="card-title">Défausse</h5>
+	</div>
+
+	<div class="card-body text-center">
+		<ng-container *ngFor="let card of match.deck">
+			<card *ngIf="card.revealed" [reveale]="true" [card]="card" [match]="match"></card>
+		</ng-container>
+	</div>
+</div>
